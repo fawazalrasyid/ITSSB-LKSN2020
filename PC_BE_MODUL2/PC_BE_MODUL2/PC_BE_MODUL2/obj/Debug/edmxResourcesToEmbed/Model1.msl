@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PC_BE_MODUL2ModelStoreContainer" CdmEntityContainer="PC_BE_MODUL2Entities">
+    <EntitySetMapping Name="Categories">
+      <EntityTypeMapping TypeName="PC_BE_MODUL2Model.Category">
+        <MappingFragment StoreEntitySet="Category">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="PC_BE_MODUL2Model.Customer">
+        <MappingFragment StoreEntitySet="Customer">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetailDeposits">
+      <EntityTypeMapping TypeName="PC_BE_MODUL2Model.DetailDeposit">
+        <MappingFragment StoreEntitySet="DetailDeposit">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdDesposit" ColumnName="IdDesposit" />
+          <ScalarProperty Name="IdService" ColumnName="IdService" />
+          <ScalarProperty Name="IdPrepaidPackage" ColumnName="IdPrepaidPackage" />
+          <ScalarProperty Name="PriceUnit" ColumnName="PriceUnit" />
+          <ScalarProperty Name="TotalUnit" ColumnName="TotalUnit" />
+          <ScalarProperty Name="CompletedDatetime" ColumnName="CompletedDatetime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Employees">
+      <EntityTypeMapping TypeName="PC_BE_MODUL2Model.Employee">
+        <MappingFragment StoreEntitySet="Employee">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="DateofBirth" ColumnName="DateofBirth" />
+          <ScalarProperty Name="IdJob" ColumnName="IdJob" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HeaderDeposits">
+      <EntityTypeMapping TypeName="PC_BE_MODUL2Model.HeaderDeposit">
+        <MappingFragment StoreEntitySet="HeaderDeposit">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
+          <ScalarProperty Name="idEmployee" ColumnName="idEmployee" />
+          <ScalarProperty Name="TransactionDatetime" ColumnName="TransactionDatetime" />
+          <ScalarProperty Name="CompleteEstimationDatetime" ColumnName="CompleteEstimationDatetime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Jobs">
+      <EntityTypeMapping TypeName="PC_BE_MODUL2Model.Job">
+        <MappingFragment StoreEntitySet="Job">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Packages">
+      <EntityTypeMapping TypeName="PC_BE_MODUL2Model.Package">
+        <MappingFragment StoreEntitySet="Package">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdService" ColumnName="IdService" />
+          <ScalarProperty Name="TotalUnit" ColumnName="TotalUnit" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PrepaidPackages">
+      <EntityTypeMapping TypeName="PC_BE_MODUL2Model.PrepaidPackage">
+        <MappingFragment StoreEntitySet="PrepaidPackage">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
+          <ScalarProperty Name="IdPackage" ColumnName="IdPackage" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="StartDatetime" ColumnName="StartDatetime" />
+          <ScalarProperty Name="CompletedDatetime" ColumnName="CompletedDatetime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Services">
+      <EntityTypeMapping TypeName="PC_BE_MODUL2Model.Service">
+        <MappingFragment StoreEntitySet="Service">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
+          <ScalarProperty Name="IdUnit" ColumnName="IdUnit" />
+          <ScalarProperty Name="PriceUnit" ColumnName="PriceUnit" />
+          <ScalarProperty Name="EstimationDuration" ColumnName="EstimationDuration" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sysdiagrams">
+      <EntityTypeMapping TypeName="PC_BE_MODUL2Model.sysdiagram">
+        <MappingFragment StoreEntitySet="sysdiagrams">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+          <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="definition" ColumnName="definition" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Units">
+      <EntityTypeMapping TypeName="PC_BE_MODUL2Model.Unit">
+        <MappingFragment StoreEntitySet="Unit">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

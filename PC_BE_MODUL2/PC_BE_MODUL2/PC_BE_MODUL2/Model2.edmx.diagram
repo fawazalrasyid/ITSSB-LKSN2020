@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="81aaf8c52038406089c62583587bc798" Name="Diagram1">
+        <EntityTypeShape EntityType="PC_BE_MODUL2Model1.Category" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PC_BE_MODUL2Model1.Customer" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PC_BE_MODUL2Model1.DetailDeposit" Width="1.5" PointX="5.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PC_BE_MODUL2Model1.Employee" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PC_BE_MODUL2Model1.HeaderDeposit" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PC_BE_MODUL2Model1.Job" Width="1.5" PointX="1.5" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="PC_BE_MODUL2Model1.Package" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PC_BE_MODUL2Model1.PrepaidPackage" Width="1.5" PointX="7.5" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PC_BE_MODUL2Model1.Service" Width="1.5" PointX="3" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="PC_BE_MODUL2Model1.sysdiagram" Width="1.5" PointX="7.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PC_BE_MODUL2Model1.Unit" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="PC_BE_MODUL2Model1.FK_Service_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="PC_BE_MODUL2Model1.FK_HeaderDeposit_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="PC_BE_MODUL2Model1.FK_PrepaidPackage_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="PC_BE_MODUL2Model1.FK_DetailDeposit_HeaderDeposit" ManuallyRouted="false" />
+        <AssociationConnector Association="PC_BE_MODUL2Model1.FK_DetailDeposit_PrepaidPackage" ManuallyRouted="false" />
+        <AssociationConnector Association="PC_BE_MODUL2Model1.FK_DetailDeposit_Service" ManuallyRouted="false" />
+        <AssociationConnector Association="PC_BE_MODUL2Model1.FK_Employee_Job" ManuallyRouted="false" />
+        <AssociationConnector Association="PC_BE_MODUL2Model1.FK_HeaderDeposit_Employee" ManuallyRouted="false" />
+        <AssociationConnector Association="PC_BE_MODUL2Model1.FK_Package_Service" ManuallyRouted="false" />
+        <AssociationConnector Association="PC_BE_MODUL2Model1.FK_PrepaidPackage_Package" ManuallyRouted="false" />
+        <AssociationConnector Association="PC_BE_MODUL2Model1.FK_Service_Unit" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,774 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PC_BE_MODUL2Model1.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DetailDeposit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdDesposit" Type="int" Nullable="false" />
+          <Property Name="IdService" Type="int" Nullable="false" />
+          <Property Name="IdPrepaidPackage" Type="int" />
+          <Property Name="PriceUnit" Type="int" Nullable="false" />
+          <Property Name="TotalUnit" Type="float" Nullable="false" />
+          <Property Name="CompletedDatetime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="DateofBirth" Type="date" Nullable="false" />
+          <Property Name="IdJob" Type="int" Nullable="false" />
+          <Property Name="Salary" Type="money" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HeaderDeposit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCustomer" Type="int" Nullable="false" />
+          <Property Name="idEmployee" Type="int" Nullable="false" />
+          <Property Name="TransactionDatetime" Type="datetime" Nullable="false" />
+          <Property Name="CompleteEstimationDatetime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Package">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdService" Type="int" Nullable="false" />
+          <Property Name="TotalUnit" Type="int" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PrepaidPackage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCustomer" Type="int" Nullable="false" />
+          <Property Name="IdPackage" Type="int" Nullable="false" />
+          <Property Name="Price" Type="int" Nullable="false" />
+          <Property Name="StartDatetime" Type="datetime" Nullable="false" />
+          <Property Name="CompletedDatetime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdCategory" Type="int" Nullable="false" />
+          <Property Name="IdUnit" Type="int" Nullable="false" />
+          <Property Name="PriceUnit" Type="int" Nullable="false" />
+          <Property Name="EstimationDuration" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_DetailDeposit_HeaderDeposit">
+          <End Role="HeaderDeposit" Type="Self.HeaderDeposit" Multiplicity="1" />
+          <End Role="DetailDeposit" Type="Self.DetailDeposit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HeaderDeposit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetailDeposit">
+              <PropertyRef Name="IdDesposit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailDeposit_PrepaidPackage">
+          <End Role="PrepaidPackage" Type="Self.PrepaidPackage" Multiplicity="0..1" />
+          <End Role="DetailDeposit" Type="Self.DetailDeposit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PrepaidPackage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetailDeposit">
+              <PropertyRef Name="IdPrepaidPackage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailDeposit_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="DetailDeposit" Type="Self.DetailDeposit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetailDeposit">
+              <PropertyRef Name="IdService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="IdJob" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HeaderDeposit_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="HeaderDeposit" Type="Self.HeaderDeposit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HeaderDeposit">
+              <PropertyRef Name="IdCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HeaderDeposit_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="HeaderDeposit" Type="Self.HeaderDeposit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HeaderDeposit">
+              <PropertyRef Name="idEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Package_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="Package" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="IdService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrepaidPackage_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="PrepaidPackage" Type="Self.PrepaidPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PrepaidPackage">
+              <PropertyRef Name="IdCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrepaidPackage_Package">
+          <End Role="Package" Type="Self.Package" Multiplicity="1" />
+          <End Role="PrepaidPackage" Type="Self.PrepaidPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Package">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PrepaidPackage">
+              <PropertyRef Name="IdPackage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="IdCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Unit">
+          <End Role="Unit" Type="Self.Unit" Multiplicity="1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="IdUnit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PC_BE_MODUL2Model1StoreContainer">
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DetailDeposit" EntityType="Self.DetailDeposit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HeaderDeposit" EntityType="Self.HeaderDeposit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Job" EntityType="Self.Job" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Package" EntityType="Self.Package" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PrepaidPackage" EntityType="Self.PrepaidPackage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Unit" EntityType="Self.Unit" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_DetailDeposit_HeaderDeposit" Association="Self.FK_DetailDeposit_HeaderDeposit">
+            <End Role="HeaderDeposit" EntitySet="HeaderDeposit" />
+            <End Role="DetailDeposit" EntitySet="DetailDeposit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailDeposit_PrepaidPackage" Association="Self.FK_DetailDeposit_PrepaidPackage">
+            <End Role="PrepaidPackage" EntitySet="PrepaidPackage" />
+            <End Role="DetailDeposit" EntitySet="DetailDeposit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailDeposit_Service" Association="Self.FK_DetailDeposit_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="DetailDeposit" EntitySet="DetailDeposit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Job" Association="Self.FK_Employee_Job">
+            <End Role="Job" EntitySet="Job" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HeaderDeposit_Customer" Association="Self.FK_HeaderDeposit_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="HeaderDeposit" EntitySet="HeaderDeposit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HeaderDeposit_Employee" Association="Self.FK_HeaderDeposit_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="HeaderDeposit" EntitySet="HeaderDeposit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Package_Service" Association="Self.FK_Package_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="Package" EntitySet="Package" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrepaidPackage_Customer" Association="Self.FK_PrepaidPackage_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="PrepaidPackage" EntitySet="PrepaidPackage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrepaidPackage_Package" Association="Self.FK_PrepaidPackage_Package">
+            <End Role="Package" EntitySet="Package" />
+            <End Role="PrepaidPackage" EntitySet="PrepaidPackage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Category" Association="Self.FK_Service_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Unit" Association="Self.FK_Service_Unit">
+            <End Role="Unit" EntitySet="Unit" />
+            <End Role="Service" EntitySet="Service" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PC_BE_MODUL2Model1" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Services" Relationship="Self.FK_Service_Category" FromRole="Category" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="HeaderDeposits" Relationship="Self.FK_HeaderDeposit_Customer" FromRole="Customer" ToRole="HeaderDeposit" />
+          <NavigationProperty Name="PrepaidPackages" Relationship="Self.FK_PrepaidPackage_Customer" FromRole="Customer" ToRole="PrepaidPackage" />
+        </EntityType>
+        <EntityType Name="DetailDeposit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDesposit" Type="Int32" Nullable="false" />
+          <Property Name="IdService" Type="Int32" Nullable="false" />
+          <Property Name="IdPrepaidPackage" Type="Int32" />
+          <Property Name="PriceUnit" Type="Int32" Nullable="false" />
+          <Property Name="TotalUnit" Type="Double" Nullable="false" />
+          <Property Name="CompletedDatetime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="HeaderDeposit" Relationship="Self.FK_DetailDeposit_HeaderDeposit" FromRole="DetailDeposit" ToRole="HeaderDeposit" />
+          <NavigationProperty Name="PrepaidPackage" Relationship="Self.FK_DetailDeposit_PrepaidPackage" FromRole="DetailDeposit" ToRole="PrepaidPackage" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_DetailDeposit_Service" FromRole="DetailDeposit" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DateofBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="IdJob" Type="Int32" Nullable="false" />
+          <Property Name="Salary" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <NavigationProperty Name="Job" Relationship="Self.FK_Employee_Job" FromRole="Employee" ToRole="Job" />
+          <NavigationProperty Name="HeaderDeposits" Relationship="Self.FK_HeaderDeposit_Employee" FromRole="Employee" ToRole="HeaderDeposit" />
+        </EntityType>
+        <EntityType Name="HeaderDeposit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCustomer" Type="Int32" Nullable="false" />
+          <Property Name="idEmployee" Type="Int32" Nullable="false" />
+          <Property Name="TransactionDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CompleteEstimationDatetime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_HeaderDeposit_Customer" FromRole="HeaderDeposit" ToRole="Customer" />
+          <NavigationProperty Name="DetailDeposits" Relationship="Self.FK_DetailDeposit_HeaderDeposit" FromRole="HeaderDeposit" ToRole="DetailDeposit" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_HeaderDeposit_Employee" FromRole="HeaderDeposit" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Job">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Employee_Job" FromRole="Job" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Package">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdService" Type="Int32" Nullable="false" />
+          <Property Name="TotalUnit" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_Package_Service" FromRole="Package" ToRole="Service" />
+          <NavigationProperty Name="PrepaidPackages" Relationship="Self.FK_PrepaidPackage_Package" FromRole="Package" ToRole="PrepaidPackage" />
+        </EntityType>
+        <EntityType Name="PrepaidPackage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCustomer" Type="Int32" Nullable="false" />
+          <Property Name="IdPackage" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Int32" Nullable="false" />
+          <Property Name="StartDatetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CompletedDatetime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_PrepaidPackage_Customer" FromRole="PrepaidPackage" ToRole="Customer" />
+          <NavigationProperty Name="DetailDeposits" Relationship="Self.FK_DetailDeposit_PrepaidPackage" FromRole="PrepaidPackage" ToRole="DetailDeposit" />
+          <NavigationProperty Name="Package" Relationship="Self.FK_PrepaidPackage_Package" FromRole="PrepaidPackage" ToRole="Package" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdCategory" Type="Int32" Nullable="false" />
+          <Property Name="IdUnit" Type="Int32" Nullable="false" />
+          <Property Name="PriceUnit" Type="Int32" Nullable="false" />
+          <Property Name="EstimationDuration" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Service_Category" FromRole="Service" ToRole="Category" />
+          <NavigationProperty Name="DetailDeposits" Relationship="Self.FK_DetailDeposit_Service" FromRole="Service" ToRole="DetailDeposit" />
+          <NavigationProperty Name="Packages" Relationship="Self.FK_Package_Service" FromRole="Service" ToRole="Package" />
+          <NavigationProperty Name="Unit" Relationship="Self.FK_Service_Unit" FromRole="Service" ToRole="Unit" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Unit">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Services" Relationship="Self.FK_Service_Unit" FromRole="Unit" ToRole="Service" />
+        </EntityType>
+        <Association Name="FK_Service_Category">
+          <End Role="Category" Type="Self.Category" Multiplicity="1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="IdCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HeaderDeposit_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="HeaderDeposit" Type="Self.HeaderDeposit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HeaderDeposit">
+              <PropertyRef Name="IdCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrepaidPackage_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="PrepaidPackage" Type="Self.PrepaidPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PrepaidPackage">
+              <PropertyRef Name="IdCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailDeposit_HeaderDeposit">
+          <End Role="HeaderDeposit" Type="Self.HeaderDeposit" Multiplicity="1" />
+          <End Role="DetailDeposit" Type="Self.DetailDeposit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HeaderDeposit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetailDeposit">
+              <PropertyRef Name="IdDesposit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailDeposit_PrepaidPackage">
+          <End Role="PrepaidPackage" Type="Self.PrepaidPackage" Multiplicity="0..1" />
+          <End Role="DetailDeposit" Type="Self.DetailDeposit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PrepaidPackage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetailDeposit">
+              <PropertyRef Name="IdPrepaidPackage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailDeposit_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="DetailDeposit" Type="Self.DetailDeposit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DetailDeposit">
+              <PropertyRef Name="IdService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Job">
+          <End Role="Job" Type="Self.Job" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Job">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="IdJob" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HeaderDeposit_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="HeaderDeposit" Type="Self.HeaderDeposit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="HeaderDeposit">
+              <PropertyRef Name="idEmployee" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Package_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="Package" Type="Self.Package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Package">
+              <PropertyRef Name="IdService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PrepaidPackage_Package">
+          <End Role="Package" Type="Self.Package" Multiplicity="1" />
+          <End Role="PrepaidPackage" Type="Self.PrepaidPackage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Package">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PrepaidPackage">
+              <PropertyRef Name="IdPackage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Unit">
+          <End Role="Unit" Type="Self.Unit" Multiplicity="1" />
+          <End Role="Service" Type="Self.Service" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Unit">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Service">
+              <PropertyRef Name="IdUnit" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PC_BE_MODUL2Entities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="DetailDeposits" EntityType="Self.DetailDeposit" />
+          <EntitySet Name="Employees" EntityType="Self.Employee" />
+          <EntitySet Name="HeaderDeposits" EntityType="Self.HeaderDeposit" />
+          <EntitySet Name="Jobs" EntityType="Self.Job" />
+          <EntitySet Name="Packages" EntityType="Self.Package" />
+          <EntitySet Name="PrepaidPackages" EntityType="Self.PrepaidPackage" />
+          <EntitySet Name="Services" EntityType="Self.Service" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Units" EntityType="Self.Unit" />
+          <AssociationSet Name="FK_Service_Category" Association="Self.FK_Service_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Service" EntitySet="Services" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HeaderDeposit_Customer" Association="Self.FK_HeaderDeposit_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="HeaderDeposit" EntitySet="HeaderDeposits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrepaidPackage_Customer" Association="Self.FK_PrepaidPackage_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="PrepaidPackage" EntitySet="PrepaidPackages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailDeposit_HeaderDeposit" Association="Self.FK_DetailDeposit_HeaderDeposit">
+            <End Role="HeaderDeposit" EntitySet="HeaderDeposits" />
+            <End Role="DetailDeposit" EntitySet="DetailDeposits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailDeposit_PrepaidPackage" Association="Self.FK_DetailDeposit_PrepaidPackage">
+            <End Role="PrepaidPackage" EntitySet="PrepaidPackages" />
+            <End Role="DetailDeposit" EntitySet="DetailDeposits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailDeposit_Service" Association="Self.FK_DetailDeposit_Service">
+            <End Role="Service" EntitySet="Services" />
+            <End Role="DetailDeposit" EntitySet="DetailDeposits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Job" Association="Self.FK_Employee_Job">
+            <End Role="Job" EntitySet="Jobs" />
+            <End Role="Employee" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HeaderDeposit_Employee" Association="Self.FK_HeaderDeposit_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="HeaderDeposit" EntitySet="HeaderDeposits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Package_Service" Association="Self.FK_Package_Service">
+            <End Role="Service" EntitySet="Services" />
+            <End Role="Package" EntitySet="Packages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PrepaidPackage_Package" Association="Self.FK_PrepaidPackage_Package">
+            <End Role="Package" EntitySet="Packages" />
+            <End Role="PrepaidPackage" EntitySet="PrepaidPackages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Unit" Association="Self.FK_Service_Unit">
+            <End Role="Unit" EntitySet="Units" />
+            <End Role="Service" EntitySet="Services" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PC_BE_MODUL2Model1StoreContainer" CdmEntityContainer="PC_BE_MODUL2Entities1">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="PC_BE_MODUL2Model1.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="PC_BE_MODUL2Model1.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetailDeposits">
+            <EntityTypeMapping TypeName="PC_BE_MODUL2Model1.DetailDeposit">
+              <MappingFragment StoreEntitySet="DetailDeposit">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdDesposit" ColumnName="IdDesposit" />
+                <ScalarProperty Name="IdService" ColumnName="IdService" />
+                <ScalarProperty Name="IdPrepaidPackage" ColumnName="IdPrepaidPackage" />
+                <ScalarProperty Name="PriceUnit" ColumnName="PriceUnit" />
+                <ScalarProperty Name="TotalUnit" ColumnName="TotalUnit" />
+                <ScalarProperty Name="CompletedDatetime" ColumnName="CompletedDatetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="PC_BE_MODUL2Model1.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="DateofBirth" ColumnName="DateofBirth" />
+                <ScalarProperty Name="IdJob" ColumnName="IdJob" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HeaderDeposits">
+            <EntityTypeMapping TypeName="PC_BE_MODUL2Model1.HeaderDeposit">
+              <MappingFragment StoreEntitySet="HeaderDeposit">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
+                <ScalarProperty Name="idEmployee" ColumnName="idEmployee" />
+                <ScalarProperty Name="TransactionDatetime" ColumnName="TransactionDatetime" />
+                <ScalarProperty Name="CompleteEstimationDatetime" ColumnName="CompleteEstimationDatetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Jobs">
+            <EntityTypeMapping TypeName="PC_BE_MODUL2Model1.Job">
+              <MappingFragment StoreEntitySet="Job">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Packages">
+            <EntityTypeMapping TypeName="PC_BE_MODUL2Model1.Package">
+              <MappingFragment StoreEntitySet="Package">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdService" ColumnName="IdService" />
+                <ScalarProperty Name="TotalUnit" ColumnName="TotalUnit" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrepaidPackages">
+            <EntityTypeMapping TypeName="PC_BE_MODUL2Model1.PrepaidPackage">
+              <MappingFragment StoreEntitySet="PrepaidPackage">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdCustomer" ColumnName="IdCustomer" />
+                <ScalarProperty Name="IdPackage" ColumnName="IdPackage" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="StartDatetime" ColumnName="StartDatetime" />
+                <ScalarProperty Name="CompletedDatetime" ColumnName="CompletedDatetime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Services">
+            <EntityTypeMapping TypeName="PC_BE_MODUL2Model1.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdCategory" ColumnName="IdCategory" />
+                <ScalarProperty Name="IdUnit" ColumnName="IdUnit" />
+                <ScalarProperty Name="PriceUnit" ColumnName="PriceUnit" />
+                <ScalarProperty Name="EstimationDuration" ColumnName="EstimationDuration" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="PC_BE_MODUL2Model1.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Units">
+            <EntityTypeMapping TypeName="PC_BE_MODUL2Model1.Unit">
+              <MappingFragment StoreEntitySet="Unit">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
